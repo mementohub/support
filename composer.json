@@ -6,9 +6,6 @@
   "require": {
     "php": "^7.1"
   },
-  "require-dev": {
-    "phpunit/phpunit" : "^5.7.5"
-  },
   "autoload": {
     "psr-4": {
       "iMemento\\Support\\": "src"
@@ -32,6 +29,7 @@
     {"type": "composer", "url": "https://repo.packagist.com/imemento/"},
     {"packagist.org": false}
   ],
-  "minimum-stability": "dev",
-  "prefer-stable": true
+  "require-dev": {
+    "phpunit/phpunit": "^6.4"
+  }
 }
