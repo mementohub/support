@@ -1,0 +1,37 @@
+{
+  "name": "imemento/support",
+  "description": "Support helpers",
+  "homepage": "https://gitlab.com/imemento/composer/packages/support",
+  "license": "MIT",
+  "require": {
+    "php": "^7.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit" : "^5.7.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "iMemento\\Support\\": "src"
+    },
+    "files": [
+      "src/helpers.php"
+    ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "iMemento\\Support\\Test\\": "tests"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "repositories": [
+    {"type": "composer", "url": "https://repo.packagist.com/imemento/"},
+    {"packagist.org": false}
+  ],
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
