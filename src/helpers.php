@@ -34,7 +34,7 @@ if (! function_exists('imemento_asset')) {
     /**
      * Detects asset secure based on env var.
      *
-     * @param  array $identities
+     * @param  string $path
      * @return string
      */
     function imemento_asset(string $path): string
@@ -45,9 +45,10 @@ if (! function_exists('imemento_asset')) {
 
 if (! function_exists('imemento_url')) {
     /**
-     * Detects asset secure based on env var.
+     * Detects url secure based on env var.
      *
-     * @param  array $identities
+     * @param  string $path
+     * @param  array $parameters
      * @return string
      */
     function imemento_url(string $path = null, array $parameters = []): string
