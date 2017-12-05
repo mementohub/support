@@ -29,3 +29,16 @@ if (! function_exists('identity_decode')) {
         return Identity::decode($identities, $keys);
     }
 }
+
+if (! function_exists('imemento_asset')) {
+    /**
+     * Detects asset secure based on env var.
+     *
+     * @param  array $identities
+     * @return string
+     */
+    function imemento_asset(string $path): string
+    {
+        return asset($path, env('HTTP_SECURE'));
+    }
+}
