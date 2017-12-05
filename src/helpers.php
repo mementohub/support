@@ -42,3 +42,16 @@ if (! function_exists('imemento_asset')) {
         return asset($path, env('HTTP_SECURE'));
     }
 }
+
+if (! function_exists('imemento_url')) {
+    /**
+     * Detects asset secure based on env var.
+     *
+     * @param  array $identities
+     * @return string
+     */
+    function imemento_url(string $path = null, array $parameters = []): string
+    {
+        return url($path, $parameters, env('HTTP_SECURE'));
+    }
+}
