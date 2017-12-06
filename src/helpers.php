@@ -56,3 +56,15 @@ if (! function_exists('imemento_url')) {
         return url($path, $parameters, env('HTTP_SECURE'));
     }
 }
+
+if (! function_exists('imemento_request_scheme')) {
+    /**
+     * Detects secure based on env var and return http(s) scheme.
+     *
+     * @return string
+     */
+    function imemento_request_scheme(): string
+    {
+        return env('HTTP_SECURE') ? 'https' : 'http';
+    }
+}
