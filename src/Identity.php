@@ -39,11 +39,11 @@ class Identity
                 if ($keys) {
                     return [
                         'user_id'   => $parts[0],
-                        'agency_id' => $parts[1] ?? null
+                        'agency_id' => $parts[1] ?? 0
                     ];
                 }
 
-                return [$parts[0], $parts[1] ?? null];
+                return [$parts[0], $parts[1] ?? 0];
             },
             $identities
         );
