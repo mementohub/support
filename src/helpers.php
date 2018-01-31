@@ -49,9 +49,9 @@ if (! function_exists('imemento_url')) {
      *
      * @param  string $path
      * @param  array $parameters
-     * @return string
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string
      */
-    function imemento_url(string $path = null, array $parameters = []): string
+    function imemento_url(string $path = null, array $parameters = [])
     {
         return url($path, $parameters, env('HTTP_SECURE'));
     }
