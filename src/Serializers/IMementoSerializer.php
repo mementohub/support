@@ -7,22 +7,17 @@ use League\Fractal\Serializer\SerializerAbstract;
 use League\Fractal\Resource\ResourceInterface;
 use League\Fractal\Pagination\PaginatorInterface;
 
+
 class IMementoSerializer extends SerializerAbstract
 {
-    /**
-     * @var
-     */
-    private $stamp;
+    private $scheme;
 
-    /**
-     * IMementoSerializer constructor.
-     * @param $stamp
-     */
-    public function __construct($stamp = 0)
+    public function __construct($scheme = null)
     {
-        $this->stamp = $stamp;
+        if (!$scheme) {
+            $this->scheme = imemento_request_scheme();
+        }
     }
-
     /**
      * Serialize a collection.
      *
@@ -121,10 +116,9 @@ class IMementoSerializer extends SerializerAbstract
             $pagination['links']['prev_page_url'] = $paginator->getUrl($current_page - 1);
         }
 
-        $scheme = imemento_request_scheme();
         foreach ($pagination['links'] as &$link) {
             if (isset($link)) {
-                $link = str_replace('http://', $scheme . '://', $link);
+                $link = str_replace('http://', $this->scheme . '://', $link);
             }
         }
 
