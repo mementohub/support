@@ -52,8 +52,10 @@ class IMementoSerializerTest extends \PHPUnit\Framework\TestCase
     public function test_included_data()
     {
         $resource_interface = $this->getMockBuilder(ResourceInterface::class)->getMock();
+
         $serializer = new IMementoSerializer('https');
         $included = $serializer->includedData($resource_interface, ['key' => 'value']);
+
         $this->assertEquals(['key' => 'value'], $included);
     }
 
@@ -62,6 +64,7 @@ class IMementoSerializerTest extends \PHPUnit\Framework\TestCase
     {
         $serializer = new IMementoSerializer('https');
         $meta = $serializer->meta(['key' => 'value']);
+
         $this->assertEquals(['key' => 'value'], $meta);
     }
 
@@ -70,6 +73,7 @@ class IMementoSerializerTest extends \PHPUnit\Framework\TestCase
     {
         $serializer = new IMementoSerializer('https');
         $meta = $serializer->meta([]);
+
         $this->assertEquals([], $meta);
     }
 
