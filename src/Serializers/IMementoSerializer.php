@@ -81,6 +81,10 @@ class IMementoSerializer extends SerializerAbstract
             return [];
         }
 
+        if (empty($meta['meta'])) {
+            $meta['meta']['stamp'] = request('stamp', now()->getTimestamp());
+        }
+
         return $meta;
     }
 
