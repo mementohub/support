@@ -1,7 +1,7 @@
 {
   "name": "imemento/support",
   "description": "Support helpers",
-  "homepage": "https://gitlab.com/imemento/composer/packages/support",
+  "homepage": "https://github.com/mementohub/support",
   "license": "MIT",
   "require": {
     "php": "^7.1",
@@ -26,10 +26,6 @@
   "config": {
     "sort-packages": true
   },
-  "repositories": [
-    {"type": "composer", "url": "https://repo.packagist.com/imemento/"},
-    {"packagist.org": false}
-  ],
   "require-dev": {
     "phpunit/phpunit": "^7.0"
   }
