@@ -1,4 +1,8 @@
 # iMemento Support
+[![Build Status](https://travis-ci.org/mementohub/support.svg?branch=master)](https://travis-ci.org/mementohub/support)
+[![Latest Stable Version](https://poser.pugx.org/imemento/support/v/stable)](https://packagist.org/packages/imemento/support)
+[![License](https://poser.pugx.org/imemento/support/license)](https://packagist.org/packages/imemento/support)
+[![Total Downloads](https://poser.pugx.org/imemento/support/downloads)](https://packagist.org/packages/imemento/support)
 
 Support helpers for common internal operations (eg. identity encode/decode).
 
