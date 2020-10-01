@@ -2,11 +2,12 @@
 
 namespace iMemento\Support\Tests\Serializers;
 
-use iMemento\Support\Serializers\IMementoSerializer;
-use League\Fractal\Pagination\CursorInterface;
-use League\Fractal\Pagination\PaginatorInterface;
-use League\Fractal\Resource\ResourceInterface;
+use Orchestra\Testbench\TestCase;
 use function PHPSTORM_META\override;
+use League\Fractal\Pagination\CursorInterface;
+use League\Fractal\Resource\ResourceInterface;
+use League\Fractal\Pagination\PaginatorInterface;
+use iMemento\Support\Serializers\IMementoSerializer;
 
 
 function imemento_request_scheme()
@@ -19,7 +20,7 @@ function env()
     return 'local';
 }
 
-class IMementoSerializerTest extends \PHPUnit\Framework\TestCase
+class IMementoSerializerTest extends TestCase
 {
     /** @test */
     public function test_serializer_collection()
@@ -65,7 +66,11 @@ class IMementoSerializerTest extends \PHPUnit\Framework\TestCase
         $serializer = new IMementoSerializer('https');
         $meta = $serializer->meta(['key' => 'value']);
 
-        $this->assertEquals(['key' => 'value'], $meta);
+        $this->assertArrayHasKey('key', $meta);
+        $this->assertEquals('value', $meta['key']);
+        $this->assertArrayHasKey('meta', $meta);
+        $this->assertIsArray($meta['meta']);
+        $this->assertArrayHasKey('stamp', $meta['meta']);
     }
 
     /** @test */
