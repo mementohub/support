@@ -4,7 +4,7 @@
     "homepage": "https://gitlhub.com/mementohub/support",
     "license": "MIT",
     "require": {
-        "php": "^7.3",
+        "php": "^8.0",
         "laravel/framework": "^8.0",
         "league/fractal": "^0.17 || ^0.18 || ^0.19"
     },
