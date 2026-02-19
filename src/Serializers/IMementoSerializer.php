@@ -3,10 +3,9 @@
 namespace iMemento\Support\Serializers;
 
 use League\Fractal\Pagination\CursorInterface;
-use League\Fractal\Serializer\SerializerAbstract;
-use League\Fractal\Resource\ResourceInterface;
 use League\Fractal\Pagination\PaginatorInterface;
-
+use League\Fractal\Resource\ResourceInterface;
+use League\Fractal\Serializer\SerializerAbstract;
 
 class IMementoSerializer extends SerializerAbstract
 {
@@ -14,63 +13,47 @@ class IMementoSerializer extends SerializerAbstract
 
     public function __construct($scheme = null)
     {
-        if (!$scheme) {
+        if (! $scheme) {
             $this->scheme = imemento_request_scheme();
         }
     }
+
     /**
      * Serialize a collection.
-     *
-     * @param string $resourceKey
-     * @param array $data
-     * @return array
      */
-    public function collection($resourceKey, array $data)
+    public function collection(?string $resourceKey, array $data): array
     {
         return ['data' => $data];
     }
 
     /**
      * Serialize an item.
-     *
-     * @param string $resourceKey
-     * @param array $data
-     * @return array
      */
-    public function item($resourceKey, array $data)
+    public function item(?string $resourceKey, array $data): array
     {
         return $data;
     }
 
     /**
      * Serialize null resource.
-     *
-     * @return array
      */
-    public function null()
+    public function null(): ?array
     {
         return [];
     }
 
     /**
      * Serialize the included data.
-     *
-     * @param ResourceInterface $resource
-     * @param array $data
-     * @return array
      */
-    public function includedData(ResourceInterface $resource, array $data)
+    public function includedData(ResourceInterface $resource, array $data): array
     {
         return $data;
     }
 
     /**
      * Serialize the meta.
-     *
-     * @param array $meta
-     * @return array
      */
-    public function meta(array $meta)
+    public function meta(array $meta): array
     {
         if (empty($meta)) {
             return [];
@@ -79,38 +62,35 @@ class IMementoSerializer extends SerializerAbstract
         if (empty($meta['meta'])) {
             $meta['meta']['stamp'] = request('stamp', now()->getTimestamp());
         }
-        
+
         return $meta;
     }
 
     /**
      * Serialize the paginator.
-     *
-     * @param PaginatorInterface $paginator
-     * @return array
      */
-    public function paginator(PaginatorInterface $paginator)
+    public function paginator(PaginatorInterface $paginator): array
     {
-        $total        = (int) $paginator->getTotal();
-        $per_page     = (int) $paginator->getPerPage();
+        $total = (int) $paginator->getTotal();
+        $per_page = (int) $paginator->getPerPage();
         $current_page = (int) $paginator->getCurrentPage();
-        $last_page    = (int) $paginator->getLastPage();
-        $count        = (int) $paginator->getCount();
+        $last_page = (int) $paginator->getLastPage();
+        $count = (int) $paginator->getCount();
 
         $pagination = [
-            'total'        => $total,
-            'per_page'     => $per_page,
+            'total' => $total,
+            'per_page' => $per_page,
             'current_page' => $current_page,
-            'last_page'    => $last_page,
-            'from'         => ($per_page * $current_page) - $per_page + 1,
-            'to'           => ($per_page * $current_page + $count) - $per_page,
-            'count'        => $count
+            'last_page' => $last_page,
+            'from' => ($per_page * $current_page) - $per_page + 1,
+            'to' => ($per_page * $current_page + $count) - $per_page,
+            'count' => $count,
         ];
 
         $pagination['links']['first_page_url'] = $paginator->getUrl(1);
-        $pagination['links']['last_page_url']  = $paginator->getUrl($last_page);
-        $pagination['links']['next_page_url']  = null;
-        $pagination['links']['prev_page_url']  = null;
+        $pagination['links']['last_page_url'] = $paginator->getUrl($last_page);
+        $pagination['links']['next_page_url'] = null;
+        $pagination['links']['prev_page_url'] = null;
 
         if ($current_page < $last_page) {
             $pagination['links']['next_page_url'] = $paginator->getUrl($current_page + 1);
@@ -122,7 +102,7 @@ class IMementoSerializer extends SerializerAbstract
 
         foreach ($pagination['links'] as &$link) {
             if (isset($link)) {
-                $link = str_replace('http://', $this->scheme . '://', $link);
+                $link = str_replace('http://', $this->scheme.'://', $link);
             }
         }
 
@@ -131,17 +111,14 @@ class IMementoSerializer extends SerializerAbstract
 
     /**
      * Serialize the cursor.
-     *
-     * @param CursorInterface $cursor
-     * @return array
      */
-    public function cursor(CursorInterface $cursor)
+    public function cursor(CursorInterface $cursor): array
     {
         $cursor = [
             'current' => $cursor->getCurrent(),
-            'prev'    => $cursor->getPrev(),
-            'next'    => $cursor->getNext(),
-            'count'   => (int)$cursor->getCount(),
+            'prev' => $cursor->getPrev(),
+            'next' => $cursor->getNext(),
+            'count' => (int) $cursor->getCount(),
         ];
 
         return ['cursor' => $cursor];

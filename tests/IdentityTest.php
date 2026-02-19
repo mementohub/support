@@ -6,8 +6,7 @@ use iMemento\Support\Identity;
 
 class IdentityTest extends \PHPUnit\Framework\TestCase
 {
-    /** @test */
-    public function encode_uses_glue_to_transform_user_id_agency_id_into_identity()
+    public function test_encode_uses_glue_to_transform_user_id_agency_id_into_identity()
     {
         $actual = [[1, 3], [2, null], [3]];
         $expected = ['1.3', '2.', '3.'];
@@ -15,8 +14,7 @@ class IdentityTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, identity_encode($actual));
     }
 
-    /** @test */
-    public function decode_uses_glue_to_transform_identity_into_user_id_agency_id()
+    public function test_decode_uses_glue_to_transform_identity_into_user_id_agency_id()
     {
         $actual = ['1.3', '2.'];
         $expected = [[1, 3], [2, null]];
@@ -24,40 +22,38 @@ class IdentityTest extends \PHPUnit\Framework\TestCase
         $this->assertEquals($expected, identity_decode($actual));
     }
 
-    /** @test */
-    public function encode_uses_glue_to_transform_user_id_agency_id_into_identity_with_keys()
+    public function test_encode_uses_glue_to_transform_user_id_agency_id_into_identity_with_keys()
     {
         $actual = [
             [
-                'user_id'   => 1,
-                'agency_id' => 3
+                'user_id' => 1,
+                'agency_id' => 3,
             ],
             [
-                'user_id'   => 2,
-                'agency_id' => null
+                'user_id' => 2,
+                'agency_id' => null,
             ],
             [
-                'user_id' => 3
-            ]
+                'user_id' => 3,
+            ],
         ];
         $expected = ['1.3', '2.', '3.'];
         $this->assertEquals($expected, Identity::encode($actual, true));
         $this->assertEquals($expected, identity_encode($actual, true));
     }
 
-    /** @test */
-    public function decode_uses_glue_to_transform_identity_into_user_id_agency_id_with_keys()
+    public function test_decode_uses_glue_to_transform_identity_into_user_id_agency_id_with_keys()
     {
         $actual = ['1.3', '2.'];
         $expected = [
             [
-                'user_id'   => 1,
-                'agency_id' => 3
+                'user_id' => 1,
+                'agency_id' => 3,
             ],
             [
-                'user_id'   => 2,
-                'agency_id' => null
-            ]
+                'user_id' => 2,
+                'agency_id' => null,
+            ],
         ];
 
         $this->assertEquals($expected, Identity::decode($actual, true));

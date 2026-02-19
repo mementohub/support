@@ -5,12 +5,8 @@ namespace iMemento\Support\Tests;
 use iMemento\Support\IdGenerator;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @covers Client
- */
 class IdGeneratorTest extends TestCase
 {
-
     public function test_id_length_is_correct()
     {
         for ($i = 0; $i < 5; $i++) {
@@ -21,5 +17,4 @@ class IdGeneratorTest extends TestCase
             $this->assertEquals($length, strlen($id));
         }
     }
-
 }

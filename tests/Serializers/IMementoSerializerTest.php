@@ -2,13 +2,11 @@
 
 namespace iMemento\Support\Tests\Serializers;
 
-use Orchestra\Testbench\TestCase;
-use function PHPSTORM_META\override;
-use League\Fractal\Pagination\CursorInterface;
-use League\Fractal\Resource\ResourceInterface;
-use League\Fractal\Pagination\PaginatorInterface;
 use iMemento\Support\Serializers\IMementoSerializer;
-
+use League\Fractal\Pagination\CursorInterface;
+use League\Fractal\Pagination\PaginatorInterface;
+use League\Fractal\Resource\ResourceInterface;
+use Orchestra\Testbench\TestCase;
 
 function imemento_request_scheme()
 {
@@ -22,7 +20,6 @@ function env()
 
 class IMementoSerializerTest extends TestCase
 {
-    /** @test */
     public function test_serializer_collection()
     {
         $serializer = new IMementoSerializer('https');
@@ -31,7 +28,6 @@ class IMementoSerializerTest extends TestCase
         $this->assertEquals(['data' => ['key' => 'value']], $collection);
     }
 
-    /** @test */
     public function test_serializer_item()
     {
         $serializer = new IMementoSerializer('https');
@@ -40,7 +36,6 @@ class IMementoSerializerTest extends TestCase
         $this->assertEquals(['key' => 'value'], $item);
     }
 
-    /** @test */
     public function test_serializer_null()
     {
         $serializer = new IMementoSerializer('https');
@@ -49,7 +44,6 @@ class IMementoSerializerTest extends TestCase
         $this->assertEquals([], $null);
     }
 
-    /** @test */
     public function test_included_data()
     {
         $resource_interface = $this->getMockBuilder(ResourceInterface::class)->getMock();
@@ -60,7 +54,6 @@ class IMementoSerializerTest extends TestCase
         $this->assertEquals(['key' => 'value'], $included);
     }
 
-    /** @test */
     public function test_meta()
     {
         $serializer = new IMementoSerializer('https');
@@ -73,7 +66,6 @@ class IMementoSerializerTest extends TestCase
         $this->assertArrayHasKey('stamp', $meta['meta']);
     }
 
-    /** @test */
     public function test_empty_meta()
     {
         $serializer = new IMementoSerializer('https');
@@ -82,7 +74,6 @@ class IMementoSerializerTest extends TestCase
         $this->assertEquals([], $meta);
     }
 
-    /** @test */
     public function test_paginator()
     {
         $serializer = new IMementoSerializer('https');
@@ -93,22 +84,22 @@ class IMementoSerializerTest extends TestCase
         $paginator_interface->expects($this->any())->method('getCurrentPage')->willReturn(1);
         $paginator_interface->expects($this->any())->method('getLastPage')->willReturn(1);
         $paginator_interface->expects($this->any())->method('getCount')->willReturn(1);
-        $paginator_interface->expects($this->any())->method('getUrl')->willReturn(1);
+        $paginator_interface->expects($this->any())->method('getUrl')->willReturn('1');
 
         $expected = ['pagination' => [
-            'total'        => 1,
-            'per_page'     => 1,
+            'total' => 1,
+            'per_page' => 1,
             'current_page' => 1,
-            'last_page'    => 1,
-            'from'         => 1,
-            'to'           => 1,
-            'count'        => 1,
-            'links'         =>[
+            'last_page' => 1,
+            'from' => 1,
+            'to' => 1,
+            'count' => 1,
+            'links' => [
                 'first_page_url' => '1',
                 'last_page_url' => '1',
                 'next_page_url' => null,
                 'prev_page_url' => null,
-            ]
+            ],
         ]];
 
         $this->assertEquals($expected, $serializer->paginator($paginator_interface));
@@ -131,10 +122,9 @@ class IMementoSerializerTest extends TestCase
                 'prev' => 1,
                 'next' => 1,
                 'count' => 1,
-            ]
+            ],
         ];
 
         $this->assertEquals($expected, $serializer->cursor($cursor_interface));
     }
-
 }
